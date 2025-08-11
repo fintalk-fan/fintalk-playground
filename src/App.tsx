@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Login from './components/Login';
+import CharacterList from './components/CharacterList';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,22 +33,7 @@ function App() {
     return <Login onLogin={handleLogin} />;
   }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div className="header-content">
-          <h1>Welcome to FinTalk</h1>
-          <p>You are now authenticated!</p>
-          <div className="token-info">
-            <p><strong>Token:</strong> {authToken.substring(0, 20)}...</p>
-          </div>
-          <button onClick={handleLogout} className="logout-button">
-            Logout
-          </button>
-        </div>
-      </header>
-    </div>
-  );
+  return <CharacterList authToken={authToken} onLogout={handleLogout} />;
 }
 
 export default App;
