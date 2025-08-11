@@ -71,7 +71,7 @@
   background: #c53030;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(229, 62, 62, 0.4);
-}
+  }
 
 .logout-button:active {
   transform: translateY(0);
