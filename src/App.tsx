@@ -1,23 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Login from './components/Login';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authToken, setAuthToken] = useState('');
+
+  const handleLogin = (token: string) => {
+    setAuthToken(token);
+    setIsAuthenticated(true);
+    // You can store the token in localStorage for persistence
+    localStorage.setItem('authToken', token);
+  };
+
+  const handleLogout = () => {
+    setAuthToken('');
+    setIsAuthenticated(false);
+    localStorage.removeItem('authToken');
+  };
+
+  // Check for existing token on component mount
+  React.useEffect(() => {
+    const savedToken = localStorage.getItem('authToken');
+    if (savedToken) {
+      setAuthToken(savedToken);
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="header-content">
+          <h1>Welcome to FinTalk</h1>
+          <p>You are now authenticated!</p>
+          <div className="token-info">
+            <p><strong>Token:</strong> {authToken.substring(0, 20)}...</p>
+          </div>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
+        </div>
       </header>
     </div>
   );
