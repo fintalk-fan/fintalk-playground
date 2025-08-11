@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CharacterList.css';
 import CreateSessionModal from './CreateSessionModal';
+import CreateCharacterModal from './CreateCharacterModal';
 import ChatSession from './ChatSession';
 
 interface Character {
@@ -33,6 +34,7 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
   const [error, setError] = useState<string | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateCharacterModalOpen, setIsCreateCharacterModalOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
 
   useEffect(() => {
@@ -108,6 +110,19 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedCharacter(null);
+  };
+
+  const handleOpenCreateCharacterModal = () => {
+    setIsCreateCharacterModalOpen(true);
+  };
+
+  const handleCloseCreateCharacterModal = () => {
+    setIsCreateCharacterModalOpen(false);
+  };
+
+  const handleCharacterCreated = (characterId: string) => {
+    // Refresh the characters list after creating a new character
+    fetchData();
   };
 
   const handleContinueSession = (session: Session) => {
@@ -207,7 +222,15 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
 
         {/* Characters Section */}
         <div className="section-container">
-          <h2 className="section-title">Available Characters</h2>
+          <div className="characters-header">
+            <h2 className="section-title">Available Characters</h2>
+            <button
+              onClick={handleOpenCreateCharacterModal}
+              className="create-character-button"
+            >
+              + Create Character
+            </button>
+          </div>
           <div className="characters-grid">
             {characters.map((character) => (
               <div key={character.id} className="character-card">
@@ -260,6 +283,13 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
           authToken={authToken}
         />
       )}
+
+      <CreateCharacterModal
+        isOpen={isCreateCharacterModalOpen}
+        onClose={handleCloseCreateCharacterModal}
+        onCharacterCreated={handleCharacterCreated}
+        authToken={authToken}
+      />
     </div>
   );
 };
