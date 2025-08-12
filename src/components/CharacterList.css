@@ -349,6 +349,13 @@
   opacity: 0.9;
 }
 
+.error-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .retry-button {
   background: rgba(255, 255, 255, 0.2);
   color: white;
@@ -360,6 +367,23 @@
   cursor: pointer;
   transition: all 0.2s ease;
   backdrop-filter: blur(10px);
+}
+
+.error-container .logout-button {
+  background: #e53e3e;
+  color: white;
+  border: 2px solid #c53030;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.error-container .logout-button:hover {
+  background: #c53030;
+  border-color: #a53030;
 }
 
 .retry-button:hover {

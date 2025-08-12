@@ -309,9 +309,14 @@ const ChatSession: React.FC<ChatSessionProps> = ({ session, authToken, onBack })
         </div>
         <div className="error-container">
           <p>{error}</p>
-          <button onClick={fetchChatHistory} className="retry-button">
-            Try Again
-          </button>
+          <div className="error-actions">
+            <button onClick={fetchChatHistory} className="retry-button">
+              Try Again
+            </button>
+            <button onClick={onBack} className="logout-button">
+              Back to Sessions
+            </button>
+          </div>
         </div>
       </div>
     );

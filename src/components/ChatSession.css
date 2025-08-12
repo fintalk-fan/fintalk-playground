@@ -360,6 +360,13 @@
   opacity: 0.9;
 }
 
+.error-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .retry-button {
   background: rgba(255, 255, 255, 0.2);
   color: white;
@@ -376,6 +383,24 @@
 .retry-button:hover {
   background: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
+}
+
+.error-container .logout-button {
+  background: rgba(229, 62, 62, 0.2);
+  color: white;
+  border: 2px solid rgba(229, 62, 62, 0.3);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.error-container .logout-button:hover {
+  background: rgba(229, 62, 62, 0.3);
+  border-color: rgba(229, 62, 62, 0.5);
 }
 
 /* Scrollbar styling */

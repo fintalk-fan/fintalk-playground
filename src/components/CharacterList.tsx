@@ -79,6 +79,7 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
       const sessionsData = await sessionsResponse.json();
       setSessions(sessionsData);
     } catch (err) {
+      console.error('Fetch error:', err);
       setError(err instanceof Error ? err.message : 'Failed to fetch data');
     } finally {
       setLoading(false);
@@ -156,14 +157,20 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
   }
 
   if (error) {
+    console.log('Rendering error state with error:', error);
     return (
       <div className="character-list-container">
         <div className="error-container">
           <h2>Error Loading Characters</h2>
           <p>{error}</p>
-          <button onClick={fetchData} className="retry-button">
-            Try Again
-          </button>
+          <div className="error-actions">
+            <button onClick={fetchData} className="retry-button">
+              Try Again
+            </button>
+            <button onClick={onLogout} className="logout-button">
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     );
