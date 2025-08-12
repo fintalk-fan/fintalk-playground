@@ -3,6 +3,7 @@ import './CharacterList.css';
 import CreateSessionModal from './CreateSessionModal';
 import CreateCharacterModal from './CreateCharacterModal';
 import ChatSession from './ChatSession';
+import { API_ENDPOINTS } from '../config/api';
 
 interface Character {
   id: string;
@@ -47,7 +48,7 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
       setError(null);
 
       // Fetch characters
-      const charactersResponse = await fetch('https://api.fintalk.fan/characters/list', {
+      const charactersResponse = await fetch(API_ENDPOINTS.CHARACTERS_LIST, {
         method: 'GET',
         headers: {
           'accept': 'application/json',
@@ -63,7 +64,7 @@ const CharacterList: React.FC<CharacterListProps> = ({ authToken, onLogout }) =>
       setCharacters(charactersData);
 
       // Fetch sessions
-      const sessionsResponse = await fetch('https://api.fintalk.fan/sessions/list', {
+      const sessionsResponse = await fetch(API_ENDPOINTS.SESSIONS_LIST, {
         method: 'GET',
         headers: {
           'accept': 'application/json',

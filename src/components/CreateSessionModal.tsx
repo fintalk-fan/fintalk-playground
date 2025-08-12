@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateSessionModal.css';
+import { API_ENDPOINTS } from '../config/api';
 
 interface Character {
   id: string;
@@ -43,7 +44,7 @@ const CreateSessionModal: React.FC<CreateSessionModalProps> = ({
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch('https://api.fintalk.fan/sessions/create', {
+      const response = await fetch(API_ENDPOINTS.SESSIONS_CREATE, {
         method: 'POST',
         headers: {
           'accept': 'application/json',

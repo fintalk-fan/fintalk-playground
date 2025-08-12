@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { API_ENDPOINTS } from '../config/api';
 
 interface LoginProps {
   onLogin: (token: string) => void;
@@ -10,7 +11,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenAuthWindow = () => {
-    const authUrl = 'https://api.fintalk.fan/auth/google/login';
+    const authUrl = API_ENDPOINTS.AUTH_LOGIN;
     const authWindow = window.open(authUrl, '_blank', 'width=800,height=600');
 
     if (authWindow) {

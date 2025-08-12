@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './ChatSession.css';
+import { API_ENDPOINTS } from '../config/api';
 
 interface Arc {
   arc_id: number;
@@ -82,7 +83,7 @@ const ChatSession: React.FC<ChatSessionProps> = ({ session, authToken, onBack })
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`https://api.fintalk.fan/sessions/${session.id}/query?limit=5`, {
+      const response = await fetch(API_ENDPOINTS.SESSIONS_QUERY(session.id, 5), {
         method: 'GET',
         headers: {
           'accept': 'application/json',
@@ -130,7 +131,7 @@ const ChatSession: React.FC<ChatSessionProps> = ({ session, authToken, onBack })
     setCurrentStreamingArc({ arc_id: Date.now(), scenario: '', dialogs: [] });
 
     try {
-      const response = await fetch(`https://api.fintalk.fan/sessions/${session.id}/chat`, {
+      const response = await fetch(API_ENDPOINTS.SESSIONS_CHAT(session.id), {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -216,7 +217,7 @@ const ChatSession: React.FC<ChatSessionProps> = ({ session, authToken, onBack })
     setCurrentStreamingArc({ arc_id: Date.now(), scenario: '', dialogs: [] });
 
     try {
-      const response = await fetch(`https://api.fintalk.fan/sessions/${session.id}/chat`, {
+      const response = await fetch(API_ENDPOINTS.SESSIONS_CHAT(session.id), {
         method: 'POST',
         headers: {
           'accept': 'application/json',

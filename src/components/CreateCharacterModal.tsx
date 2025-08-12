@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateCharacterModal.css';
+import { API_ENDPOINTS } from '../config/api';
 
 interface CreateCharacterModalProps {
   isOpen: boolean;
@@ -77,7 +78,7 @@ const CreateCharacterModal: React.FC<CreateCharacterModalProps> = ({
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch('https://api.fintalk.fan/characters/create', {
+      const response = await fetch(API_ENDPOINTS.CHARACTERS_CREATE, {
         method: 'POST',
         headers: {
           'accept': 'application/json',
