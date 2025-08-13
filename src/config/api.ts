@@ -1,5 +1,6 @@
 // API Configuration
 export const API_BASE_URL = 'https://api.fintalk.fan';
+// export const API_BASE_URL = 'http://localhost:8080';
 
 // API Endpoints
 export const API_ENDPOINTS = {
